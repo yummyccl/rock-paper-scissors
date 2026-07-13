@@ -269,13 +269,13 @@
     <h2>👋 选择你的身份</h2>
     <div class="modal-sub">选好身份后开始对战！先到先选哦～</div>
     <div class="role-options">
-      <div class="role-option wife-opt" id="wifeOption" onclick="selectRole('wife')">
+      <div class="role-option wife-opt" id="wifeOption" >
         <div class="opt-avatar">👩‍🦰</div>
         <div class="opt-name">susy</div>
         <div class="opt-tag">老婆</div>
         <div class="opt-taken-tag" style="display:none;">已被选</div>
       </div>
-      <div class="role-option husband-opt" id="husbandOption" onclick="selectRole('husband')">
+      <div class="role-option husband-opt" id="husbandOption" >
         <div class="opt-avatar">🧑</div>
         <div class="opt-name">eko</div>
         <div class="opt-tag">老公</div>
@@ -519,6 +519,16 @@
       }
     } catch(e) {}
   };
+  // 绑定角色选择事件（替代 onclick）
+  wifeOption.addEventListener('click', function(e) {
+    e.preventDefault();
+    selectRole('wife');
+  });
+  husbandOption.addEventListener('click', function(e) {
+    e.preventDefault();
+    selectRole('husband');
+  });
+
   // ====== Gist 操作 ======
   async function readGist() {
     const resp = await fetch(RAW_URL + '?t=' + Date.now());
