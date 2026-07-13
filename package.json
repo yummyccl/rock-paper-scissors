@@ -1,0 +1,11 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo done"
+  },
+  "dependencies": {
+    "@vercel/kv": "^1.0.0"
+  }
+}

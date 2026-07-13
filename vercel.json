@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/rps/(.*)", "destination": "/api/rps/$1" },
+    { "source": "/(.*)", "destination": "/public/$1" }
+  ]
+}
