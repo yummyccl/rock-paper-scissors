@@ -269,7 +269,7 @@
 (function() {
   // ====== 配置 ======
   const GIST_ID = '90f81a0af79bfcf7e7420895f0597876';
-  // Token 通过 URL 参数传入：?t=ghp_xxx
+  // Token 通过 URL 参数传入：?t=你的Token
   const GIST_TOKEN = new URLSearchParams(location.search).get('t') || '';
   const RAW_URL = `https://gist.githubusercontent.com/yummyccl/${GIST_ID}/raw/rps-data.json`;
   const GIST_API = `https://api.github.com/gists/${GIST_ID}`;
@@ -499,19 +499,36 @@
 
       // 分配角色
       if (!myRole) {
-        // 检查谁在线
         const now = Date.now();
         const wifeOnline = room.wifeConnected && (now - room.wifeLastSeen < 15000);
         const husbandOnline = room.husbandConnected && (now - room.husbandLastSeen < 15000);
 
-        if (!wifeOnline && !husbandOnline) {
+        // 先到先得：如果老婆位空着就当老婆，否则当老公
+        if (!wifeOnline) {
           setRole('wife');
-        } else if (!wifeOnline && husbandOnline) {
-          setRole('wife');
-        } else if (wifeOnline && !husbandOnline) {
+          // 立刻抢占老婆位
+          try {
+            const fresh = await readGist();
+            if (fresh.room && !fresh.room.wifeConnected) {
+              fresh.room.wifeConnected = true;
+              fresh.room.wifeLastSeen = Date.now();
+              fresh.room.version++;
+              await writeGist(fresh);
+            }
+          } catch(e) {}
+        } else if (!husbandOnline) {
           setRole('husband');
+          try {
+            const fresh = await readGist();
+            if (fresh.room && !fresh.room.husbandConnected) {
+              fresh.room.husbandConnected = true;
+              fresh.room.husbandLastSeen = Date.now();
+              fresh.room.version++;
+              await writeGist(fresh);
+            }
+          } catch(e) {}
         } else {
-          // 两个都在线，默认老婆
+          // 两个都在线了（可能是刷新页面），默认老婆
           setRole('wife');
         }
 
@@ -704,9 +721,12 @@
     }
   })();
 
-  // ====== 启动 ======
-  poll();
-  pollTimer = setInterval(poll, POLL_INTERVAL);
+  // ====== 启动（加随机延迟避免两人同时抢占） ======
+  const initDelay = 200 + Math.random() * 800; // 200-1000ms 随机延迟
+  setTimeout(() => {
+    poll();
+    pollTimer = setInterval(poll, POLL_INTERVAL);
+  }, initDelay);
 })();
 </script>
 </body>
