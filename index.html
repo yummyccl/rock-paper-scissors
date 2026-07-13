@@ -482,32 +482,31 @@
   window.selectRole = async function(role) {
     if (myRole) return;
 
-    // 先关闭弹窗、设置角色（不管网络是否成功）
-    setRole(role);
+    // 立即关闭弹窗 + 设置角色
+    roleModal.style.display = 'none';
+    myRole = role;
+    if (role === 'wife') {
+      myAvatar.className = 'role-avatar wife';
+      myAvatar.textContent = '👩‍🦰';
+      myName.textContent = 'susy';
+      myTag.textContent = '(老婆)';
+      partnerLabel.textContent = 'eko 出拳';
+      partnerStatus.className = 'partner-status waiting husband-name';
+    } else {
+      myAvatar.className = 'role-avatar husband';
+      myAvatar.textContent = '🧑';
+      myName.textContent = 'eko';
+      myTag.textContent = '(老公)';
+      partnerLabel.textContent = 'susy 出拳';
+      partnerStatus.className = 'partner-status waiting wife-name';
+    }
     startHeartbeat();
 
-    // 异步通知服务器
+    // 后台异步通知服务器
     try {
       const data = await readGist();
       if (data && data.room) {
         const now = Date.now();
-        const wifeOnline = data.room.wifeConnected && (now - data.room.wifeLastSeen < 15000);
-        const husbandOnline = data.room.husbandConnected && (now - data.room.husbandLastSeen < 15000);
-
-        if (role === 'wife' && wifeOnline) {
-          alert('susy 已经被选走啦！试试选 eko 吧～');
-          myRole = null;
-          roleModal.style.display = 'flex';
-          return;
-        }
-        if (role === 'husband' && husbandOnline) {
-          alert('eko 已经被选走啦！试试选 susy 吧～');
-          myRole = null;
-          roleModal.style.display = 'flex';
-          return;
-        }
-
-        data.room.version++;
         if (role === 'wife') {
           data.room.wifeConnected = true;
           data.room.wifeLastSeen = now;
@@ -515,14 +514,11 @@
           data.room.husbandConnected = true;
           data.room.husbandLastSeen = now;
         }
+        data.room.version++;
         await writeGist(data);
       }
-    } catch(e) {
-      // 网络失败也没关系，已经本地设置了角色
-      console.log('���色同步失败，但不影响使用', e);
-    }
+    } catch(e) {}
   };
-
   // ====== Gist 操作 ======
   async function readGist() {
     const resp = await fetch(RAW_URL + '?t=' + Date.now());
