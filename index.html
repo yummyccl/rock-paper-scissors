@@ -481,38 +481,45 @@
   // 用户选择角色（全局函数，由 onclick 调用）
   window.selectRole = async function(role) {
     if (myRole) return;
+
+    // 先关闭弹窗、设置角色（不管网络是否成功）
+    setRole(role);
+    startHeartbeat();
+
+    // 异步通知服务器
     try {
       const data = await readGist();
-      if (!data.room) return;
-      const now = Date.now();
-      const wifeOnline = data.room.wifeConnected && (now - data.room.wifeLastSeen < 15000);
-      const husbandOnline = data.room.husbandConnected && (now - data.room.husbandLastSeen < 15000);
+      if (data && data.room) {
+        const now = Date.now();
+        const wifeOnline = data.room.wifeConnected && (now - data.room.wifeLastSeen < 15000);
+        const husbandOnline = data.room.husbandConnected && (now - data.room.husbandLastSeen < 15000);
 
-      if (role === 'wife' && wifeOnline) {
-        alert('susy 已经被选走啦！试试选 eko 吧～');
-        return;
-      }
-      if (role === 'husband' && husbandOnline) {
-        alert('eko 已经被选走啦！试试选 susy 吧～');
-        return;
-      }
+        if (role === 'wife' && wifeOnline) {
+          alert('susy 已经被选走啦！试试选 eko 吧～');
+          myRole = null;
+          roleModal.style.display = 'flex';
+          return;
+        }
+        if (role === 'husband' && husbandOnline) {
+          alert('eko 已经被选走啦！试试选 susy 吧～');
+          myRole = null;
+          roleModal.style.display = 'flex';
+          return;
+        }
 
-      // 抢占角色
-      data.room.version++;
-      if (role === 'wife') {
-        data.room.wifeConnected = true;
-        data.room.wifeLastSeen = now;
-      } else {
-        data.room.husbandConnected = true;
-        data.room.husbandLastSeen = now;
+        data.room.version++;
+        if (role === 'wife') {
+          data.room.wifeConnected = true;
+          data.room.wifeLastSeen = now;
+        } else {
+          data.room.husbandConnected = true;
+          data.room.husbandLastSeen = now;
+        }
+        await writeGist(data);
       }
-      await writeGist(data);
-      setRole(role);
-      startHeartbeat();
     } catch(e) {
-      // 如果网络失败，直接允许选
-      setRole(role);
-      startHeartbeat();
+      // 网络失败也没关系，已经本地设置了角色
+      console.log('���色同步失败，但不影响使用', e);
     }
   };
 
