@@ -6,26 +6,16 @@
   <title>老婆 ❤️ eko — 石头剪刀布</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
       min-height: 100vh;
       background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
       display: flex; justify-content: center; align-items: center;
       padding: 16px; overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent;
     }
-
     .hearts-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-    .heart-float {
-      position: absolute; animation: floatUp 8s ease-in infinite; opacity: 0; font-size: 24px;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 0.6; }
-      90% { opacity: 0.3; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-    }
+    .heart-float { position: absolute; animation: floatUp 8s ease-in infinite; opacity: 0; font-size: 24px; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.3; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
     .container {
       position: relative; z-index: 1;
@@ -37,7 +27,6 @@
       box-shadow: 0 16px 50px rgba(180,80,80,0.15);
       text-align: center;
     }
-
     .title { font-size: 24px; font-weight: 700; color: #d44a6a; margin-bottom: 2px; }
     .subtitle { font-size: 13px; color: #b08a8a; margin-bottom: 14px; }
 
@@ -55,15 +44,8 @@
     .conn-status.offline .conn-dot { background: #f44336; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    .my-role {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      margin-bottom: 6px;
-    }
-    .role-avatar {
-      width: 56px; height: 56px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
+    .my-role { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
+    .role-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
     .role-avatar.wife { background: linear-gradient(135deg, #ffd1d1, #ffb3b3); }
     .role-avatar.husband { background: linear-gradient(135deg, #c9e4ff, #a3cfff); }
     .role-name { font-size: 18px; font-weight: 700; color: #555; }
@@ -77,93 +59,31 @@
     .partner-status.waiting { color: #999; }
 
     .partner-card-area { margin-bottom: 16px; }
-    .partner-card {
-      width: 80px; height: 80px; margin: 0 auto 6px;
-      border-radius: 18px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
-      background: #f0f0f0;
-      border: 2px dashed #ddd;
-      transition: all 0.4s ease;
-    }
-    .partner-card.waiting {
-      background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
-      border: 2px solid #ccc; font-size: 24px; color: #999;
-    }
-    .partner-card.chosen-waiting {
-      background: #f5f5f5; border: 2px solid #ccc; font-size: 28px;
-    }
-    .partner-card.revealed {
-      background: white; border: 3px solid #5b8def;
-      animation: flipIn 0.5s ease;
-    }
+    .partner-card { width: 80px; height: 80px; margin: 0 auto 6px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 36px; background: #f0f0f0; border: 2px dashed #ddd; transition: all 0.4s ease; }
+    .partner-card.waiting { background: linear-gradient(135deg, #e8e8e8, #d0d0d0); border: 2px solid #ccc; font-size: 24px; color: #999; }
+    .partner-card.chosen-waiting { background: #f5f5f5; border: 2px solid #ccc; font-size: 28px; }
+    .partner-card.revealed { background: white; border: 3px solid #5b8def; animation: flipIn 0.5s ease; }
     .partner-card-label { font-size: 12px; color: #aaa; }
 
     .my-choice-area { margin-bottom: 16px; }
-    .choice-card {
-      width: 100px; height: 100px; margin: 0 auto 8px;
-      border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px;
-      background: #f8f8f8;
-      border: 2px dashed #e0e0e0;
-      transition: all 0.4s ease;
-    }
-    .choice-card.chosen {
-      background: #fff5f5;
-      border: 3px solid #e8576b;
-      box-shadow: 0 4px 16px rgba(232,87,107,0.2);
-    }
-    .choice-card.revealed {
-      background: white;
-      border: 3px solid #e8576b;
-      animation: flipIn 0.5s ease;
-    }
+    .choice-card { width: 100px; height: 100px; margin: 0 auto 8px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 52px; background: #f8f8f8; border: 2px dashed #e0e0e0; transition: all 0.4s ease; }
+    .choice-card.chosen { background: #fff5f5; border: 3px solid #e8576b; box-shadow: 0 4px 16px rgba(232,87,107,0.2); }
+    .choice-card.revealed { background: white; border: 3px solid #e8576b; animation: flipIn 0.5s ease; }
     .choice-card.revealed.blue { border-color: #5b8def; }
-    @keyframes flipIn {
-      0% { transform: rotateY(90deg) scale(0.8); }
-      60% { transform: rotateY(-10deg) scale(1.05); }
-      100% { transform: rotateY(0) scale(1); }
-    }
+    @keyframes flipIn { 0% { transform: rotateY(90deg) scale(0.8); } 60% { transform: rotateY(-10deg) scale(1.05); } 100% { transform: rotateY(0) scale(1); } }
     .my-card-label { font-size: 13px; color: #aaa; }
 
-    .choices {
-      display: flex; gap: 14px; justify-content: center; margin-bottom: 10px;
-    }
-    .choice-btn {
-      width: 80px; height: 80px;
-      border-radius: 18px;
-      border: 3px solid transparent;
-      background: white;
-      font-size: 38px;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-      display: flex; align-items: center; justify-content: center;
-      -webkit-tap-highlight-color: transparent;
-      flex-direction: column;
-    }
+    .choices { display: flex; gap: 14px; justify-content: center; margin-bottom: 10px; }
+    .choice-btn { width: 80px; height: 80px; border-radius: 18px; border: 3px solid transparent; background: white; font-size: 38px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 12px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; flex-direction: column; }
     .choice-btn:active { transform: scale(0.93); background: #fff5f5; border-color: #e8576b; }
-    .choice-btn.selected {
-      border-color: #e8576b; background: #fff5f5;
-      transform: scale(1.06);
-      box-shadow: 0 4px 18px rgba(232,87,107,0.25);
-    }
+    .choice-btn.selected { border-color: #e8576b; background: #fff5f5; transform: scale(1.06); box-shadow: 0 4px 18px rgba(232,87,107,0.25); }
     .choice-btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
     .choice-label { font-size: 11px; color: #bbb; margin-top: 2px; }
 
-    .btn-cancel {
-      padding: 8px 24px; font-size: 13px; color: #999;
-      background: none; border: 1px solid #ddd; border-radius: 20px;
-      cursor: pointer; margin-bottom: 12px;
-      transition: all 0.2s;
-    }
+    .btn-cancel { padding: 8px 24px; font-size: 13px; color: #999; background: none; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; margin-bottom: 12px; transition: all 0.2s; }
     .btn-cancel:hover { border-color: #e8576b; color: #e8576b; }
 
-    .result {
-      margin-top: 4px; min-height: 70px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-    }
+    .result { margin-top: 4px; min-height: 70px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .result-text { font-size: 20px; font-weight: 700; color: #d44a6a; animation: popIn 0.5s ease; }
     .result-emoji { font-size: 42px; margin-bottom: 4px; animation: bounceIn 0.6s ease; }
     @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; } }
@@ -171,17 +91,9 @@
 
     .kiss-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
     .kiss-particle { position: absolute; font-size: 36px; animation: kissFly 2s ease-out forwards; opacity: 0; }
-    @keyframes kissFly {
-      0% { transform: translate(0,0) scale(0); opacity: 0; }
-      15% { transform: translate(0,0) scale(1.5); opacity: 1; }
-      100% { transform: translate(var(--dx),var(--dy)) scale(0.8); opacity: 0; }
-    }
+    @keyframes kissFly { 0% { transform: translate(0,0) scale(0); opacity: 0; } 15% { transform: translate(0,0) scale(1.5); opacity: 1; } 100% { transform: translate(var(--dx),var(--dy)) scale(0.8); opacity: 0; } }
 
-    .already-played {
-      margin-top: 8px; padding: 12px 16px;
-      background: #fff5f5; border-radius: 14px;
-      border: 1.5px dashed #fccdd3;
-    }
+    .already-played { margin-top: 8px; padding: 12px 16px; background: #fff5f5; border-radius: 14px; border: 1.5px dashed #fccdd3; }
     .already-played .msg { font-size: 14px; color: #c05a6e; font-weight: 500; }
     .already-played .countdown { font-size: 12px; color: #b08a8a; margin-top: 4px; }
 
@@ -194,68 +106,40 @@
     .history-item.draw { background: #f0f0f0; color: #aaa; }
     .stats { display: flex; justify-content: center; gap: 16px; margin-top: 12px; font-size: 12px; color: #999; flex-wrap: wrap; }
     .stats strong { color: #d44a6a; }
-
     .hint { font-size: 12px; color: #bbb; margin-top: 8px; line-height: 1.5; }
     .hint strong { color: #e8576b; }
 
     /* 角色选择弹窗 */
-    .role-modal-overlay {
+    .role-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.45); z-index: 999;
       display: flex; align-items: center; justify-content: center;
-      z-index: 200; backdrop-filter: blur(4px);
     }
-    .role-modal {
+    .role-dialog {
       background: white; border-radius: 24px;
-      padding: 32px 28px 28px;
-      max-width: 360px; width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-      animation: modalIn 0.35s ease;
+      padding: 32px 24px 28px; width: 90%; max-width: 340px;
+      text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
     }
-    @keyframes modalIn {
-      0% { transform: scale(0.85); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .role-dialog h2 { font-size: 20px; color: #d44a6a; margin-bottom: 6px; }
+    .role-dialog .sub { font-size: 13px; color: #b08a8a; margin-bottom: 24px; }
+    .role-btns { display: flex; gap: 12px; justify-content: center; }
+    .role-btn {
+      flex: 1; max-width: 140px; padding: 20px 10px 16px;
+      border-radius: 18px; border: 2px solid #e8e8e8;
+      background: #fafafa; cursor: pointer;
+      transition: all 0.2s; text-align: center;
+      -webkit-tap-highlight-color: transparent;
     }
-    .role-modal h2 {
-      font-size: 20px; color: #d44a6a; margin-bottom: 6px;
-    }
-    .role-modal .modal-sub {
-      font-size: 13px; color: #b08a8a; margin-bottom: 24px;
-    }
-    .role-options {
-      display: flex; gap: 14px; justify-content: center;
-    }
-    .role-option {
-      flex: 1; max-width: 140px;
-      padding: 20px 12px 16px;
-      border-radius: 18px;
-      border: 2px solid #e8e8e8;
-      background: #fafafa;
-      cursor: pointer;
-      transition: all 0.25s;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 8px;
-    }
-    .role-option:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .role-option:active { transform: scale(0.96); }
-    .role-option.wife-opt:hover { border-color: #e8576b; background: #fff5f5; }
-    .role-option.husband-opt:hover { border-color: #5b8def; background: #f0f6ff; }
-    .role-option.wife-opt.taken { opacity: 0.45; pointer-events: none; border-color: #ddd; }
-    .role-option.husband-opt.taken { opacity: 0.45; pointer-events: none; border-color: #ddd; }
-    .role-option .opt-avatar {
-      width: 56px; height: 56px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px;
-    }
-    .role-option.wife-opt .opt-avatar { background: linear-gradient(135deg, #ffd1d1, #ffb3b3); }
-    .role-option.husband-opt .opt-avatar { background: linear-gradient(135deg, #c9e4ff, #a3cfff); }
-    .role-option .opt-name { font-size: 16px; font-weight: 700; color: #555; }
-    .role-option .opt-tag { font-size: 11px; color: #aaa; }
-    .role-option .opt-taken-tag { font-size: 11px; color: #e8576b; font-weight: 600; }
+    .role-btn:active { transform: scale(0.95); }
+    .role-btn.wife-btn:hover, .role-btn.wife-btn:active { border-color: #e8576b; background: #fff5f5; }
+    .role-btn.husband-btn:hover, .role-btn.husband-btn:active { border-color: #5b8def; background: #f0f6ff; }
+    .role-btn .btn-avatar { font-size: 36px; margin-bottom: 6px; }
+    .role-btn .btn-name { font-size: 16px; font-weight: 700; color: #555; }
+    .role-btn .btn-desc { font-size: 11px; color: #aaa; }
+    .role-btn.taken { opacity: 0.4; pointer-events: none; }
+    .role-btn .btn-taken { display: none; font-size: 11px; color: #e8576b; font-weight: 600; margin-top: 4px; }
+    .role-btn.taken .btn-taken { display: block; }
+    .role-btn.taken .btn-desc { display: none; }
   </style>
 </head>
 <body>
@@ -264,30 +148,31 @@
 <div class="kiss-container" id="kissContainer"></div>
 
 <!-- 角色选择弹窗 -->
-<div class="role-modal-overlay" id="roleModal">
-  <div class="role-modal">
+<div class="role-overlay" id="roleOverlay">
+  <div class="role-dialog">
     <h2>👋 选择你的身份</h2>
-    <div class="modal-sub">选好身份后开始对战！先到先选哦～</div>
-    <div class="role-options">
-      <div class="role-option wife-opt" id="wifeOption" >
-        <div class="opt-avatar">👩‍🦰</div>
-        <div class="opt-name">susy</div>
-        <div class="opt-tag">老婆</div>
-        <div class="opt-taken-tag" style="display:none;">已被选</div>
+    <div class="sub">选好身份后开始对战！先到先选～</div>
+    <div class="role-btns">
+      <div class="role-btn wife-btn" id="btnWife">
+        <div class="btn-avatar">👩‍🦰</div>
+        <div class="btn-name">susy</div>
+        <div class="btn-desc">老婆</div>
+        <div class="btn-taken">已被选</div>
       </div>
-      <div class="role-option husband-opt" id="husbandOption" >
-        <div class="opt-avatar">🧑</div>
-        <div class="opt-name">eko</div>
-        <div class="opt-tag">老公</div>
-        <div class="opt-taken-tag" style="display:none;">已被选</div>
+      <div class="role-btn husband-btn" id="btnHusband">
+        <div class="btn-avatar">🧑</div>
+        <div class="btn-name">eko</div>
+        <div class="btn-desc">老公</div>
+        <div class="btn-taken">已被选</div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- 游戏主体 -->
 <div class="container">
   <div class="title">💕 石头剪刀布 💕</div>
-  <div class="subtitle">老婆 ❤️ eko · 每日一局 · 双设备对战</div>
+  <div class="subtitle">susy ❤️ eko · 每日一局 · 双设备对战</div>
 
   <div class="conn-status syncing" id="connStatus">
     <span class="conn-dot"></span>
@@ -347,502 +232,372 @@
 </div>
 
 <script>
+// ====== 配置 ======
+var GIST_ID = '90f81a0af79bfcf7e7420895f0597876';
+var GIST_TOKEN = (new URLSearchParams(location.search)).get('t') || '';
+var RAW_URL = 'https://gist.githubusercontent.com/yummyccl/' + GIST_ID + '/raw/rps-data.json';
+var GIST_API = 'https://api.github.com/gists/' + GIST_ID;
+var POLL_MS = 1500;
+var HB_MS = 4000;
 
-  // 等待 DOM 加载完成
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+var EMOJI = { rock: '✊', scissors: '✌️', paper: '🖐️' };
 
-  function init() {
+function today() {
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
 
-  // ====== 配置 ======
-  const GIST_ID = '90f81a0af79bfcf7e7420895f0597876';
-  // Token 通过 URL 参数传入：?t=你的Token
-  const GIST_TOKEN = new URLSearchParams(location.search).get('t') || '';
-  const RAW_URL = `https://gist.githubusercontent.com/yummyccl/${GIST_ID}/raw/rps-data.json`;
-  const GIST_API = `https://api.github.com/gists/${GIST_ID}`;
-  const POLL_INTERVAL = 1500; // 轮询间隔（毫秒）
-  const HEARTBEAT_INTERVAL = 4000;
+function judge(a, b) {
+  if (a === b) return 'draw';
+  if ((a === 'rock' && b === 'scissors') || (a === 'scissors' && b === 'paper') || (a === 'paper' && b === 'rock')) return 'win';
+  return 'lose';
+}
 
-  const choiceEmoji = { rock: '✊', scissors: '✌️', paper: '🖐️' };
+var myRole = null;
+var myChoice = null;
+var gameOver = false;
+var lastRevealed = false;
+var pollTimer = null;
+var hbTimer = null;
 
-  function getToday() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
+// DOM 引用（在 DOMContentLoaded 后赋值）
+var connStatus, connText, myAvatar, myName, myTag, partnerStatus, partnerLabel, partnerCard, myCard;
+var choiceBtns, btnCancel, resultEl, alreadyPlayedEl, playedMsg, countdownEl;
+var historyListEl, statsEl, hintEl, kissContainer;
+var roleOverlay, btnWife, btnHusband;
 
-  function judge(a, b) {
-    if (a === b) return 'draw';
-    if ((a === 'rock' && b === 'scissors') ||
-        (a === 'scissors' && b === 'paper') ||
-        (a === 'paper' && b === 'rock')) return 'win';
-    return 'lose';
-  }
-
-  let myRole = null;
-  let myChoice = null;
-  let gameOver = false;
-  let lastVersion = 0;
-  let lastRevealed = false;
-  let pollTimer = null;
-  let heartbeatTimer = null;
-  let isUpdating = false; // 防止并发写 Gist
-
-  // DOM
-  const connStatus = document.getElementById('connStatus');
-  const connText = document.getElementById('connText');
-  const myAvatar = document.getElementById('myAvatar');
-  const myName = document.getElementById('myName');
-  const myTag = document.getElementById('myTag');
-  const partnerStatus = document.getElementById('partnerStatus');
-  const partnerLabel = document.getElementById('partnerLabel');
-  const partnerCard = document.getElementById('partnerCard');
-  const myCard = document.getElementById('myCard');
-  const choiceBtns = document.querySelectorAll('.choice-btn');
-  const btnCancel = document.getElementById('btnCancel');
-  const resultEl = document.getElementById('result');
-  const alreadyPlayedEl = document.getElementById('alreadyPlayed');
-  const playedMsg = document.getElementById('playedMsg');
-  const countdownEl = document.getElementById('countdown');
-  const historyListEl = document.getElementById('historyList');
-  const statsEl = document.getElementById('stats');
-  const hintEl = document.getElementById('hint');
-  const kissContainer = document.getElementById('kissContainer');
-  const roleModal = document.getElementById('roleModal');
-  const wifeOption = document.getElementById('wifeOption');
-  const husbandOption = document.getElementById('husbandOption');
-
-  function spawnKisses(count) {
-    for (let i = 0; i < count; i++) {
-      setTimeout(() => {
-        const p = document.createElement('div');
+// ====== 工具函数 ======
+function spawnKisses(n) {
+  for (var i = 0; i < n; i++) {
+    (function(j) {
+      setTimeout(function() {
+        var p = document.createElement('div');
         p.className = 'kiss-particle';
         p.textContent = '💋';
         p.style.left = (30 + Math.random() * 40) + '%';
-        p.style.top  = (30 + Math.random() * 20) + '%';
+        p.style.top = (30 + Math.random() * 20) + '%';
         p.style.setProperty('--dx', ((Math.random() - 0.5) * 300) + 'px');
         p.style.setProperty('--dy', ((Math.random() - 0.5) * 200 - 100) + 'px');
         p.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
         kissContainer.appendChild(p);
-        setTimeout(() => { if (p.parentNode) p.parentNode.removeChild(p); }, 2500);
-      }, i * 120);
-    }
+        setTimeout(function() { if (p.parentNode) p.parentNode.removeChild(p); }, 2500);
+      }, j * 120);
+    })(i);
   }
+}
 
-  function updateCountdown() {
-    const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
-    const diff = tomorrow - now;
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    countdownEl.textContent = `⏰ 距离下一局还有 ${h} 小时 ${m} 分钟`;
-  }
+function updateCountdown() {
+  var now = new Date();
+  var tmr = new Date(now);
+  tmr.setDate(tmr.getDate() + 1);
+  tmr.setHours(0, 0, 0, 0);
+  var diff = tmr - now;
+  var h = Math.floor(diff / 3600000);
+  var m = Math.floor((diff % 3600000) / 60000);
+  countdownEl.textContent = '⏰ 距离下一局还有 ' + h + ' 小时 ' + m + ' 分钟';
+}
 
-  function setConnState(state) {
-    connStatus.className = 'conn-status ' + state;
-    if (state === 'syncing') connText.textContent = '同步中...';
-    else if (state === 'online') connText.textContent = '已连接';
-    else connText.textContent = '离线';
-  }
+function setConn(s) {
+  connStatus.className = 'conn-status ' + s;
+  connText.textContent = s === 'syncing' ? '同步中...' : s === 'online' ? '已连接' : '离线';
+}
 
-  function setRole(role) {
-    myRole = role;
-    roleModal.style.display = 'none';
-    if (role === 'wife') {
-      myAvatar.className = 'role-avatar wife';
-      myAvatar.textContent = '👩‍🦰';
-      myName.textContent = 'susy';
-      myTag.textContent = '(老婆)';
-      partnerLabel.textContent = 'eko 出拳';
-      partnerStatus.className = 'partner-status waiting husband-name';
-    } else {
-      myAvatar.className = 'role-avatar husband';
-      myAvatar.textContent = '🧑';
-      myName.textContent = 'eko';
-      myTag.textContent = '(老公)';
-      partnerLabel.textContent = 'susy 出拳';
-      partnerStatus.className = 'partner-status waiting wife-name';
-    }
-  }
-
-  // 更新弹窗状态
-  function updateRoleModal(wifeOnline, husbandOnline) {
-    if (wifeOnline) {
-      wifeOption.classList.add('taken');
-      wifeOption.querySelector('.opt-taken-tag').style.display = 'block';
-    } else {
-      wifeOption.classList.remove('taken');
-      wifeOption.querySelector('.opt-taken-tag').style.display = 'none';
-    }
-    if (husbandOnline) {
-      husbandOption.classList.add('taken');
-      husbandOption.querySelector('.opt-taken-tag').style.display = 'block';
-    } else {
-      husbandOption.classList.remove('taken');
-      husbandOption.querySelector('.opt-taken-tag').style.display = 'none';
-    }
-  }
-
-  // 用户选择角色（全局函数，由 onclick 调用）
-  window.selectRole = async function(role) {
-    if (myRole) return;
-
-    // 立即关闭弹窗 + 设置角色
-    roleModal.style.display = 'none';
-    myRole = role;
-    if (role === 'wife') {
-      myAvatar.className = 'role-avatar wife';
-      myAvatar.textContent = '👩‍🦰';
-      myName.textContent = 'susy';
-      myTag.textContent = '(老婆)';
-      partnerLabel.textContent = 'eko 出拳';
-      partnerStatus.className = 'partner-status waiting husband-name';
-    } else {
-      myAvatar.className = 'role-avatar husband';
-      myAvatar.textContent = '🧑';
-      myName.textContent = 'eko';
-      myTag.textContent = '(老公)';
-      partnerLabel.textContent = 'susy 出拳';
-      partnerStatus.className = 'partner-status waiting wife-name';
-    }
-    startHeartbeat();
-
-    // 后台异步通知服务器
-    try {
-      const data = await readGist();
-      if (data && data.room) {
-        const now = Date.now();
-        if (role === 'wife') {
-          data.room.wifeConnected = true;
-          data.room.wifeLastSeen = now;
-        } else {
-          data.room.husbandConnected = true;
-          data.room.husbandLastSeen = now;
-        }
-        data.room.version++;
-        await writeGist(data);
-      }
-    } catch(e) {}
-  };
-  // 绑定角色选择事件（替代 onclick）
-  wifeOption.addEventListener('click', function(e) {
-    e.preventDefault();
-    selectRole('wife');
+// ====== Gist 读写 ======
+function readGist() {
+  return fetch(RAW_URL + '?t=' + Date.now()).then(function(r) { return r.json(); });
+}
+function writeGist(data) {
+  return fetch(GIST_API, {
+    method: 'PATCH',
+    headers: { 'Authorization': 'token ' + GIST_TOKEN, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+    body: JSON.stringify({ files: { 'rps-data.json': { content: JSON.stringify(data) } } })
   });
-  husbandOption.addEventListener('click', function(e) {
-    e.preventDefault();
-    selectRole('husband');
-  });
+}
 
-  // ====== Gist 操作 ======
-  async function readGist() {
-    const resp = await fetch(RAW_URL + '?t=' + Date.now());
-    if (!resp.ok) throw new Error('read failed');
-    return await resp.json();
+// ====== 选择角色 ======
+function pickRole(role) {
+  if (myRole) return;
+  myRole = role;
+  roleOverlay.style.display = 'none';
+
+  if (role === 'wife') {
+    myAvatar.className = 'role-avatar wife'; myAvatar.textContent = '👩‍🦰';
+    myName.textContent = 'susy'; myTag.textContent = '(老婆)';
+    partnerLabel.textContent = 'eko 出拳';
+    partnerStatus.className = 'partner-status waiting husband-name';
+  } else {
+    myAvatar.className = 'role-avatar husband'; myAvatar.textContent = '🧑';
+    myName.textContent = 'eko'; myTag.textContent = '(老公)';
+    partnerLabel.textContent = 'susy 出拳';
+    partnerStatus.className = 'partner-status waiting wife-name';
   }
 
-  async function writeGist(data) {
-    if (isUpdating) return;
-    isUpdating = true;
-    try {
-      const content = JSON.stringify(data);
-      await fetch(GIST_API, {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `token ${GIST_TOKEN}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-          files: { 'rps-data.json': { content: content } }
-        })
-      });
-    } catch(e) {
-      console.error('writeGist error:', e);
+  hbTimer = setInterval(doHeartbeat, HB_MS);
+
+  // 后台通知服务器
+  readGist().then(function(data) {
+    if (!data || !data.room) return;
+    var now = Date.now();
+    if (role === 'wife') { data.room.wifeConnected = true; data.room.wifeLastSeen = now; }
+    else { data.room.husbandConnected = true; data.room.husbandLastSeen = now; }
+    data.room.version++;
+    writeGist(data);
+  }).catch(function(){});
+}
+
+function doHeartbeat() {
+  if (!myRole || gameOver) return;
+  readGist().then(function(data) {
+    if (!data || !data.room) return;
+    var now = Date.now();
+    if (myRole === 'wife') { data.room.wifeConnected = true; data.room.wifeLastSeen = now; }
+    else { data.room.husbandConnected = true; data.room.husbandLastSeen = now; }
+    if (now - data.room.wifeLastSeen > 15000) data.room.wifeConnected = false;
+    if (now - data.room.husbandLastSeen > 15000) data.room.husbandConnected = false;
+    data.room.version++;
+    writeGist(data);
+  }).catch(function(){});
+}
+
+function doChoose(choice) {
+  if (!myRole || gameOver) return;
+  readGist().then(function(data) {
+    if (!data || !data.room || data.room.revealed) return;
+    var now = Date.now();
+    if (myRole === 'wife') { data.room.wifeChoice = choice; data.room.wifeLastSeen = now; data.room.wifeConnected = true; }
+    else { data.room.husbandChoice = choice; data.room.husbandLastSeen = now; data.room.husbandConnected = true; }
+    data.room.version++;
+    if (data.room.wifeChoice && data.room.husbandChoice) {
+      data.room.result = judge(data.room.wifeChoice, data.room.husbandChoice);
+      data.room.revealed = true;
+      data.room.version++;
+      var td = today();
+      var recs = data.records || [];
+      var idx = -1;
+      for (var i = 0; i < recs.length; i++) { if (recs[i].date === td) { idx = i; break; } }
+      var nr = { date: td, wifeChoice: data.room.wifeChoice, husbandChoice: data.room.husbandChoice, result: data.room.result };
+      if (idx >= 0) recs[idx] = nr; else recs.push(nr);
+      data.records = recs;
     }
-    isUpdating = false;
-  }
+    writeGist(data);
+  }).catch(function(){});
+}
 
-  // ====== 业务逻辑 ======
-  async function doHeartbeat() {
-    if (!myRole || gameOver) return;
-    try {
-      const data = await readGist();
-      if (!data.room) return;
+function doCancel() {
+  if (!myRole || gameOver) return;
+  readGist().then(function(data) {
+    if (!data || !data.room || data.room.revealed) return;
+    if (myRole === 'wife') data.room.wifeChoice = null;
+    else data.room.husbandChoice = null;
+    data.room.version++;
+    writeGist(data);
+  }).catch(function(){});
+}
 
-      const now = Date.now();
-      if (myRole === 'wife') {
-        data.room.wifeConnected = true;
-        data.room.wifeLastSeen = now;
-      } else {
-        data.room.husbandConnected = true;
-        data.room.husbandLastSeen = now;
-      }
+// ====== 轮询 ======
+function poll() {
+  readGist().then(function(data) {
+    if (!data || !data.room) return;
+    var room = data.room;
+    var records = data.records || [];
+    setConn('online');
 
-      // 清理超时
-      if (now - data.room.wifeLastSeen > 15000) data.room.wifeConnected = false;
-      if (now - data.room.husbandLastSeen > 15000) data.room.husbandConnected = false;
+    // 还没选角色 → 更新弹窗状态
+    if (!myRole) {
+      var now = Date.now();
+      var wifeOn = room.wifeConnected && (now - room.wifeLastSeen < 15000);
+      var husbandOn = room.husbandConnected && (now - room.husbandLastSeen < 15000);
+      if (wifeOn) { btnWife.classList.add('taken'); } else { btnWife.classList.remove('taken'); }
+      if (husbandOn) { btnHusband.classList.add('taken'); } else { btnHusband.classList.remove('taken'); }
 
-      data.room.version++;
-      await writeGist(data);
-    } catch(e) {}
-  }
-
-  async function doChoose(choice) {
-    if (!myRole || gameOver) return;
-    try {
-      const data = await readGist();
-      if (!data.room) return;
-      if (data.room.revealed) return; // 已经揭晓了
-
-      const now = Date.now();
-      if (myRole === 'wife') {
-        data.room.wifeChoice = choice;
-        data.room.wifeLastSeen = now;
-        data.room.wifeConnected = true;
-      } else {
-        data.room.husbandChoice = choice;
-        data.room.husbandLastSeen = now;
-        data.room.husbandConnected = true;
-      }
-      data.room.version++;
-
-      // 双方都选了 → 揭晓
-      if (data.room.wifeChoice && data.room.husbandChoice) {
-        const result = judge(data.room.wifeChoice, data.room.husbandChoice);
-        data.room.result = result;
-        data.room.revealed = true;
-        data.room.version++;
-
-        // 保存战绩
-        const today = getToday();
-        const idx = (data.records || []).findIndex(r => r.date === today);
-        const newRecord = {
-          date: today,
-          wifeChoice: data.room.wifeChoice,
-          husbandChoice: data.room.husbandChoice,
-          result: result
-        };
-        if (idx >= 0) data.records[idx] = newRecord;
-        else data.records.push(newRecord);
-      }
-
-      await writeGist(data);
-    } catch(e) {}
-  }
-
-  async function doCancel() {
-    if (!myRole || gameOver) return;
-    try {
-      const data = await readGist();
-      if (!data.room) return;
-      if (data.room.revealed) return;
-
-      if (myRole === 'wife') data.room.wifeChoice = null;
-      else data.room.husbandChoice = null;
-
-      data.room.version++;
-      await writeGist(data);
-    } catch(e) {}
-  }
-
-  // ====== 轮询 ======
-  async function poll() {
-    try {
-      const data = await readGist();
-      if (!data || !data.room) return;
-      const room = data.room;
-      const records = data.records || [];
-
-      setConnState('online');
-
-      // 更新弹窗中"已被选"状态
-      if (!myRole && roleModal.style.display !== 'none') {
-        const now = Date.now();
-        const wifeOnline = room.wifeConnected && (now - room.wifeLastSeen < 15000);
-        const husbandOnline = room.husbandConnected && (now - room.husbandLastSeen < 15000);
-        updateRoleModal(wifeOnline, husbandOnline);
-      }
-
-      // 检查今日是否已玩过（未选角色时也显示结果）
-      if (!myRole) {
-        const today = getToday();
-        const todayRecord = records.find(r => r.date === today);
-        if (todayRecord && room.revealed) {
-          // 已玩过，隐藏弹窗直接显示
-          roleModal.style.display = 'none';
-          setRole(todayRecord.wifeChoice ? 'wife' : 'husband');
-          showResult(todayRecord.wifeChoice, todayRecord.husbandChoice, todayRecord.result, todayRecord);
+      // 今日已玩过
+      var td = today();
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].date === td && records[i].result !== undefined) {
+          roleOverlay.style.display = 'none';
+          myRole = 'wife';
+          showResult(records[i].wifeChoice, records[i].husbandChoice, records[i].result);
           renderHistory(records);
           return;
         }
       }
+      return;
+    }
 
-      if (!myRole) return; // 还没选角色，等用户选
-          return;
-        }
+    // 揭晓
+    if (room.revealed && !lastRevealed) {
+      lastRevealed = true;
+      gameOver = true;
+      showResult(room.wifeChoice, room.husbandChoice, room.result);
+      renderHistory(records);
+      return;
+    }
+    if (room.revealed) return;
 
-        // 开始心跳
-        startHeartbeat();
-      }
+    // 更新对手状态
+    var partnerRole = myRole === 'wife' ? 'husband' : 'wife';
+    var partnerConn = partnerRole === 'wife' ? room.wifeConnected : room.husbandConnected;
+    var partnerCh = partnerRole === 'wife' ? room.wifeChoice : room.husbandChoice;
+    var pName = partnerRole === 'wife' ? 'susy' : 'eko';
 
-      // 如果已经揭晓
-      if (room.revealed && !lastRevealed) {
-        lastRevealed = true;
-        gameOver = true;
-        showResult(room.wifeChoice, room.husbandChoice, room.result);
-        renderHistory(records);
-        return;
-      }
-
-      if (room.revealed) return; // 已经显示过了
-
-      // 更新对手连接状态
-      const partnerRole = myRole === 'wife' ? 'husband' : 'wife';
-      const partnerConnected = partnerRole === 'wife' ? room.wifeConnected : room.husbandConnected;
-      const partnerChoice = partnerRole === 'wife' ? room.wifeChoice : room.husbandChoice;
-      const partnerName = partnerRole === 'wife' ? '老婆' : 'eko';
-
-      if (partnerConnected) {
-        partnerStatus.className = 'partner-status ready ' + partnerRole + '-name';
-        if (partnerChoice) {
-          partnerCard.className = 'partner-card chosen-waiting';
-          partnerCard.textContent = '✅';
-          partnerStatus.innerHTML = `<span class="name">${partnerName}</span> 已选好！`;
-        } else {
-          partnerCard.className = 'partner-card waiting';
-          partnerCard.textContent = '❓';
-          partnerStatus.innerHTML = `<span class="name">${partnerName}</span> 已加入！等 ta 出拳...`;
-        }
+    if (partnerConn) {
+      partnerStatus.className = 'partner-status ready ' + partnerRole + '-name';
+      if (partnerCh) {
+        partnerCard.className = 'partner-card chosen-waiting';
+        partnerCard.textContent = '✅';
+        partnerStatus.innerHTML = '<span class="name">' + pName + '</span> 已选好！';
       } else {
-        partnerStatus.className = 'partner-status waiting ' + partnerRole + '-name';
         partnerCard.className = 'partner-card waiting';
         partnerCard.textContent = '❓';
-        partnerStatus.innerHTML = `等待 <span class="name">${partnerName}</span> 加入...`;
+        partnerStatus.innerHTML = '<span class="name">' + pName + '</span> 已加入！等 ta 出拳...';
       }
-
-      // 更新我的出拳状态
-      const myChoiceOnServer = myRole === 'wife' ? room.wifeChoice : room.husbandChoice;
-      if (myChoiceOnServer && !myChoice) {
-        myChoice = myChoiceOnServer;
-        myCard.textContent = choiceEmoji[myChoice];
-        myCard.className = 'choice-card chosen';
-        choiceBtns.forEach(b => {
-          if (b.dataset.choice === myChoice) b.classList.add('selected');
-        });
-        btnCancel.style.display = 'inline-block';
-      }
-
-      lastVersion = room.version;
-      renderHistory(records);
-    } catch(e) {
-      setConnState('offline');
-    }
-  }
-
-  function startHeartbeat() {
-    heartbeatTimer = setInterval(doHeartbeat, HEARTBEAT_INTERVAL);
-  }
-
-  // ====== 显示结果 ======
-  function showResult(wifeChoice, husbandChoice, result, todayRecord) {
-    if (myRole === 'wife') {
-      myCard.textContent = choiceEmoji[wifeChoice];
-      myCard.className = 'choice-card revealed';
-      partnerCard.textContent = choiceEmoji[husbandChoice];
-      partnerCard.className = 'partner-card revealed';
     } else {
-      myCard.textContent = choiceEmoji[husbandChoice];
-      myCard.className = 'choice-card revealed blue';
-      partnerCard.textContent = choiceEmoji[wifeChoice];
-      partnerCard.className = 'partner-card revealed';
+      partnerStatus.className = 'partner-status waiting ' + partnerRole + '-name';
+      partnerCard.className = 'partner-card waiting';
+      partnerCard.textContent = '❓';
+      partnerStatus.innerHTML = '等待 <span class="name">' + pName + '</span> 加入...';
     }
 
-    let kisses = 0;
-    let html = '';
-    if (result === 'win') {
-      kisses = 2;
-      html = `<div class="result-emoji">😘😘</div><div class="result-text">老婆赢了！eko 乖乖过来，亲两口～💋💋</div>`;
-    } else if (result === 'lose') {
-      kisses = 1;
-      html = `<div class="result-emoji">😚</div><div class="result-text">eko 赢了！来，亲老婆一口～💋</div>`;
-    } else {
-      html = `<div class="result-emoji">🤝</div><div class="result-text">平局！今天不亲啦～明天继续 💕</div>`;
-    }
-    resultEl.innerHTML = html;
-    if (kisses > 0) spawnKisses(kisses * 3);
-
-    gameOver = true;
-    alreadyPlayedEl.style.display = 'block';
-    if (result === 'win') playedMsg.textContent = '💋 老婆赢了！eko 已经被亲了两口啦～';
-    else if (result === 'lose') playedMsg.textContent = '💋 eko 赢了！已经亲了老婆一口啦～';
-    else playedMsg.textContent = '🤝 平局！谁也没亲到谁～';
-    updateCountdown();
-    setInterval(updateCountdown, 60000);
-
-    choiceBtns.forEach(b => b.disabled = true);
-    btnCancel.style.display = 'none';
-    hintEl.style.display = 'none';
-    partnerStatus.textContent = '';
-    partnerStatus.className = 'partner-status';
-
-    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
-    setConnState('offline');
-  }
-
-  function renderHistory(records) {
-    const recent = [...records].sort((a,b) => b.date.localeCompare(a.date)).slice(0,14);
-    historyListEl.innerHTML = '';
-    if (recent.length === 0) {
-      historyListEl.innerHTML = '<span style="font-size:12px;color:#ccc;">还没有记录～</span>';
-    }
-    recent.forEach(r => {
-      const div = document.createElement('div');
-      div.className = 'history-item ' + r.result;
-      div.title = `${r.date}\n老婆: ${choiceEmoji[r.wifeChoice]} vs eko: ${choiceEmoji[r.husbandChoice]}`;
-      div.textContent = r.result === 'win' ? '😘' : r.result === 'lose' ? '😚' : '🤝';
-      historyListEl.appendChild(div);
-    });
-    const wins = records.filter(r => r.result === 'win').length;
-    const loses = records.filter(r => r.result === 'lose').length;
-    const draws = records.filter(r => r.result === 'draw').length;
-    const totalKisses = wins * 2 + loses;
-    statsEl.innerHTML = `老婆赢 <strong>${wins}</strong> &nbsp;|&nbsp; eko赢 <strong>${loses}</strong> &nbsp;|&nbsp; 平局 <strong>${draws}</strong> &nbsp;|&nbsp; 累计亲亲 <strong>${totalKisses}</strong> 口 💋`;
-  }
-
-  // ====== 出拳按钮 ======
-  choiceBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (gameOver || !myRole) return;
-
-      if (btn.classList.contains('selected')) {
-        btn.classList.remove('selected');
-        myChoice = null;
-        myCard.textContent = '❓';
-        myCard.className = 'choice-card';
-        btnCancel.style.display = 'none';
-        doCancel();
-        return;
-      }
-
-      choiceBtns.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      myChoice = btn.dataset.choice;
-      myCard.textContent = choiceEmoji[myChoice];
-      myCard.className = 'choice-card chosen';
-      btnCancel.style.display = 'inline-block';
-      doChoose(myChoice);
-    });
+    renderHistory(records);
+  }).catch(function() {
+    setConn('offline');
   });
+}
 
-  btnCancel.addEventListener('click', () => {
+// ====== 显示结果 ======
+function showResult(w, h, r) {
+  if (myRole === 'wife') {
+    myCard.textContent = EMOJI[w]; myCard.className = 'choice-card revealed';
+    partnerCard.textContent = EMOJI[h]; partnerCard.className = 'partner-card revealed';
+  } else {
+    myCard.textContent = EMOJI[h]; myCard.className = 'choice-card revealed blue';
+    partnerCard.textContent = EMOJI[w]; partnerCard.className = 'partner-card revealed';
+  }
+
+  var kisses = 0;
+  var html = '';
+  if (r === 'win') { kisses = 2; html = '<div class="result-emoji">😘😘</div><div class="result-text">susy赢了！eko 乖乖过来，亲两口～💋💋</div>'; }
+  else if (r === 'lose') { kisses = 1; html = '<div class="result-emoji">😚</div><div class="result-text">eko 赢了！来，亲 susy 一口～💋</div>'; }
+  else { html = '<div class="result-emoji">🤝</div><div class="result-text">平局！今天不亲啦～明天继续 💕</div>'; }
+  resultEl.innerHTML = html;
+  if (kisses > 0) spawnKisses(kisses * 3);
+
+  gameOver = true;
+  alreadyPlayedEl.style.display = 'block';
+  if (r === 'win') playedMsg.textContent = '💋 susy 赢了！eko 已经被亲了两口啦～';
+  else if (r === 'lose') playedMsg.textContent = '💋 eko 赢了！已经亲了 susy 一口啦～';
+  else playedMsg.textContent = '🤝 平局！谁也没亲到谁～';
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  for (var i = 0; i < choiceBtns.length; i++) choiceBtns[i].disabled = true;
+  btnCancel.style.display = 'none';
+  hintEl.style.display = 'none';
+  partnerStatus.textContent = '';
+  partnerStatus.className = 'partner-status';
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  if (hbTimer) { clearInterval(hbTimer); hbTimer = null; }
+  setConn('offline');
+}
+
+function renderHistory(records) {
+  var recent = records.slice().sort(function(a,b) { return b.date.localeCompare(a.date); }).slice(0, 14);
+  historyListEl.innerHTML = '';
+  if (recent.length === 0) {
+    historyListEl.innerHTML = '<span style="font-size:12px;color:#ccc;">还没有记录～</span>';
+  }
+  for (var i = 0; i < recent.length; i++) {
+    var r = recent[i];
+    var div = document.createElement('div');
+    div.className = 'history-item ' + r.result;
+    div.title = r.date + '\nsusy: ' + EMOJI[r.wifeChoice] + ' vs eko: ' + EMOJI[r.husbandChoice];
+    div.textContent = r.result === 'win' ? '😘' : r.result === 'lose' ? '😚' : '🤝';
+    historyListEl.appendChild(div);
+  }
+  var wins = 0, loses = 0, draws = 0;
+  for (var i = 0; i < records.length; i++) {
+    if (records[i].result === 'win') wins++;
+    else if (records[i].result === 'lose') loses++;
+    else draws++;
+  }
+  statsEl.innerHTML = 'susy赢 <strong>' + wins + '</strong> &nbsp;|&nbsp; eko赢 <strong>' + loses + '</strong> &nbsp;|&nbsp; 平局 <strong>' + draws + '</strong> &nbsp;|&nbsp; 累计亲亲 <strong>' + (wins*2 + loses) + '</strong> 口 💋';
+}
+
+// ====== 背景 ======
+(function() {
+  var c = document.getElementById('heartsBg');
+  var h = ['❤️','💕','💖','💗','💝','💘','🌸'];
+  for (var i = 0; i < 18; i++) {
+    var s = document.createElement('span');
+    s.className = 'heart-float';
+    s.textContent = h[Math.floor(Math.random()*h.length)];
+    s.style.left = Math.random()*100+'%';
+    s.style.animationDelay = Math.random()*10+'s';
+    s.style.animationDuration = (6+Math.random()*8)+'s';
+    s.style.fontSize = (16+Math.random()*28)+'px';
+    c.appendChild(s);
+  }
+})();
+
+// ====== DOMContentLoaded 初始化 ======
+document.addEventListener('DOMContentLoaded', function() {
+  // DOM 引用
+  connStatus = document.getElementById('connStatus');
+  connText = document.getElementById('connText');
+  myAvatar = document.getElementById('myAvatar');
+  myName = document.getElementById('myName');
+  myTag = document.getElementById('myTag');
+  partnerStatus = document.getElementById('partnerStatus');
+  partnerLabel = document.getElementById('partnerLabel');
+  partnerCard = document.getElementById('partnerCard');
+  myCard = document.getElementById('myCard');
+  choiceBtns = document.querySelectorAll('.choice-btn');
+  btnCancel = document.getElementById('btnCancel');
+  resultEl = document.getElementById('result');
+  alreadyPlayedEl = document.getElementById('alreadyPlayed');
+  playedMsg = document.getElementById('playedMsg');
+  countdownEl = document.getElementById('countdown');
+  historyListEl = document.getElementById('historyList');
+  statsEl = document.getElementById('stats');
+  hintEl = document.getElementById('hint');
+  kissContainer = document.getElementById('kissContainer');
+  roleOverlay = document.getElementById('roleOverlay');
+  btnWife = document.getElementById('btnWife');
+  btnHusband = document.getElementById('btnHusband');
+
+  // 角色选择点击事件
+  btnWife.addEventListener('click', function(e) { e.preventDefault(); pickRole('wife'); });
+  btnHusband.addEventListener('click', function(e) { e.preventDefault(); pickRole('husband'); });
+
+  // 出拳按钮
+  for (var i = 0; i < choiceBtns.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        if (gameOver || !myRole) return;
+        if (btn.classList.contains('selected')) {
+          btn.classList.remove('selected');
+          myChoice = null;
+          myCard.textContent = '❓';
+          myCard.className = 'choice-card';
+          btnCancel.style.display = 'none';
+          doCancel();
+          return;
+        }
+        for (var j = 0; j < choiceBtns.length; j++) choiceBtns[j].classList.remove('selected');
+        btn.classList.add('selected');
+        myChoice = btn.dataset.choice;
+        myCard.textContent = EMOJI[myChoice];
+        myCard.className = 'choice-card chosen';
+        btnCancel.style.display = 'inline-block';
+        doChoose(myChoice);
+      });
+    })(choiceBtns[i]);
+  }
+
+  // 取消按钮
+  btnCancel.addEventListener('click', function() {
     if (gameOver) return;
-    choiceBtns.forEach(b => b.classList.remove('selected'));
+    for (var i = 0; i < choiceBtns.length; i++) choiceBtns[i].classList.remove('selected');
     myChoice = null;
     myCard.textContent = '❓';
     myCard.className = 'choice-card';
@@ -850,29 +605,11 @@
     doCancel();
   });
 
-  // ====== 背景 ======
-  (function bg() {
-    const c = document.getElementById('heartsBg');
-    const h = ['❤️','💕','💖','💗','💝','💘','🌸'];
-    for (let i = 0; i < 18; i++) {
-      const s = document.createElement('span');
-      s.className = 'heart-float';
-      s.textContent = h[Math.floor(Math.random()*h.length)];
-      s.style.left = Math.random()*100+'%';
-      s.style.animationDelay = Math.random()*10+'s';
-      s.style.animationDuration = (6+Math.random()*8)+'s';
-      s.style.fontSize = (16+Math.random()*28)+'px';
-      c.appendChild(s);
-    }
-  })();
-
-  // ====== 启动 ======
-  // 先轮询一次获取弹窗状态，然后持续轮询
+  // 启动轮询
   poll();
-  pollTimer = setInterval(poll, POLL_INTERVAL);
-
-  }
-})();
+  pollTimer = setInterval(poll, POLL_MS);
+});
 </script>
+
 </body>
 </html>
