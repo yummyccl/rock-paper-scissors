@@ -347,7 +347,16 @@
 </div>
 
 <script>
-(function() {
+
+  // 等待 DOM 加载完成
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  function init() {
+
   // ====== 配置 ======
   const GIST_ID = '90f81a0af79bfcf7e7420895f0597876';
   // Token 通过 URL 参数传入：?t=你的Token
@@ -861,6 +870,8 @@
   // 先轮询一次获取弹窗状态，然后持续轮询
   poll();
   pollTimer = setInterval(poll, POLL_INTERVAL);
+
+  }
 })();
 </script>
 </body>
