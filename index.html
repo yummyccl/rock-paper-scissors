@@ -197,12 +197,93 @@
 
     .hint { font-size: 12px; color: #bbb; margin-top: 8px; line-height: 1.5; }
     .hint strong { color: #e8576b; }
+
+    /* 角色选择弹窗 */
+    .role-modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.45);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200; backdrop-filter: blur(4px);
+    }
+    .role-modal {
+      background: white; border-radius: 24px;
+      padding: 32px 28px 28px;
+      max-width: 360px; width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      animation: modalIn 0.35s ease;
+    }
+    @keyframes modalIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .role-modal h2 {
+      font-size: 20px; color: #d44a6a; margin-bottom: 6px;
+    }
+    .role-modal .modal-sub {
+      font-size: 13px; color: #b08a8a; margin-bottom: 24px;
+    }
+    .role-options {
+      display: flex; gap: 14px; justify-content: center;
+    }
+    .role-option {
+      flex: 1; max-width: 140px;
+      padding: 20px 12px 16px;
+      border-radius: 18px;
+      border: 2px solid #e8e8e8;
+      background: #fafafa;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px;
+    }
+    .role-option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .role-option:active { transform: scale(0.96); }
+    .role-option.wife-opt:hover { border-color: #e8576b; background: #fff5f5; }
+    .role-option.husband-opt:hover { border-color: #5b8def; background: #f0f6ff; }
+    .role-option.wife-opt.taken { opacity: 0.45; pointer-events: none; border-color: #ddd; }
+    .role-option.husband-opt.taken { opacity: 0.45; pointer-events: none; border-color: #ddd; }
+    .role-option .opt-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+    }
+    .role-option.wife-opt .opt-avatar { background: linear-gradient(135deg, #ffd1d1, #ffb3b3); }
+    .role-option.husband-opt .opt-avatar { background: linear-gradient(135deg, #c9e4ff, #a3cfff); }
+    .role-option .opt-name { font-size: 16px; font-weight: 700; color: #555; }
+    .role-option .opt-tag { font-size: 11px; color: #aaa; }
+    .role-option .opt-taken-tag { font-size: 11px; color: #e8576b; font-weight: 600; }
   </style>
 </head>
 <body>
 
 <div class="hearts-bg" id="heartsBg"></div>
 <div class="kiss-container" id="kissContainer"></div>
+
+<!-- 角色选择弹窗 -->
+<div class="role-modal-overlay" id="roleModal">
+  <div class="role-modal">
+    <h2>👋 选择你的身份</h2>
+    <div class="modal-sub">选好身份后开始对战！先到先选哦～</div>
+    <div class="role-options">
+      <div class="role-option wife-opt" id="wifeOption" onclick="selectRole('wife')">
+        <div class="opt-avatar">👩‍🦰</div>
+        <div class="opt-name">susy</div>
+        <div class="opt-tag">老婆</div>
+        <div class="opt-taken-tag" style="display:none;">已被选</div>
+      </div>
+      <div class="role-option husband-opt" id="husbandOption" onclick="selectRole('husband')">
+        <div class="opt-avatar">🧑</div>
+        <div class="opt-name">eko</div>
+        <div class="opt-tag">老公</div>
+        <div class="opt-taken-tag" style="display:none;">已被选</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="title">💕 石头剪刀布 💕</div>
@@ -320,6 +401,9 @@
   const statsEl = document.getElementById('stats');
   const hintEl = document.getElementById('hint');
   const kissContainer = document.getElementById('kissContainer');
+  const roleModal = document.getElementById('roleModal');
+  const wifeOption = document.getElementById('wifeOption');
+  const husbandOption = document.getElementById('husbandOption');
 
   function spawnKisses(count) {
     for (let i = 0; i < count; i++) {
@@ -358,22 +442,79 @@
 
   function setRole(role) {
     myRole = role;
+    roleModal.style.display = 'none';
     if (role === 'wife') {
       myAvatar.className = 'role-avatar wife';
       myAvatar.textContent = '👩‍🦰';
-      myName.textContent = '老婆';
-      myTag.textContent = '(你)';
+      myName.textContent = 'susy';
+      myTag.textContent = '(老婆)';
       partnerLabel.textContent = 'eko 出拳';
       partnerStatus.className = 'partner-status waiting husband-name';
     } else {
       myAvatar.className = 'role-avatar husband';
       myAvatar.textContent = '🧑';
       myName.textContent = 'eko';
-      myTag.textContent = '(你)';
-      partnerLabel.textContent = '老婆 出拳';
+      myTag.textContent = '(老公)';
+      partnerLabel.textContent = 'susy 出拳';
       partnerStatus.className = 'partner-status waiting wife-name';
     }
   }
+
+  // 更新弹窗状态
+  function updateRoleModal(wifeOnline, husbandOnline) {
+    if (wifeOnline) {
+      wifeOption.classList.add('taken');
+      wifeOption.querySelector('.opt-taken-tag').style.display = 'block';
+    } else {
+      wifeOption.classList.remove('taken');
+      wifeOption.querySelector('.opt-taken-tag').style.display = 'none';
+    }
+    if (husbandOnline) {
+      husbandOption.classList.add('taken');
+      husbandOption.querySelector('.opt-taken-tag').style.display = 'block';
+    } else {
+      husbandOption.classList.remove('taken');
+      husbandOption.querySelector('.opt-taken-tag').style.display = 'none';
+    }
+  }
+
+  // 用户选择角色（全局函数，由 onclick 调用）
+  window.selectRole = async function(role) {
+    if (myRole) return;
+    try {
+      const data = await readGist();
+      if (!data.room) return;
+      const now = Date.now();
+      const wifeOnline = data.room.wifeConnected && (now - data.room.wifeLastSeen < 15000);
+      const husbandOnline = data.room.husbandConnected && (now - data.room.husbandLastSeen < 15000);
+
+      if (role === 'wife' && wifeOnline) {
+        alert('susy 已经被选走啦！试试选 eko 吧～');
+        return;
+      }
+      if (role === 'husband' && husbandOnline) {
+        alert('eko 已经被选走啦！试试选 susy 吧～');
+        return;
+      }
+
+      // 抢占角色
+      data.room.version++;
+      if (role === 'wife') {
+        data.room.wifeConnected = true;
+        data.room.wifeLastSeen = now;
+      } else {
+        data.room.husbandConnected = true;
+        data.room.husbandLastSeen = now;
+      }
+      await writeGist(data);
+      setRole(role);
+      startHeartbeat();
+    } catch(e) {
+      // 如果网络失败，直接允许选
+      setRole(role);
+      startHeartbeat();
+    }
+  };
 
   // ====== Gist 操作 ======
   async function readGist() {
@@ -497,47 +638,29 @@
 
       setConnState('online');
 
-      // 分配角色
-      if (!myRole) {
+      // 更新弹窗中"已被选"状态
+      if (!myRole && roleModal.style.display !== 'none') {
         const now = Date.now();
         const wifeOnline = room.wifeConnected && (now - room.wifeLastSeen < 15000);
         const husbandOnline = room.husbandConnected && (now - room.husbandLastSeen < 15000);
+        updateRoleModal(wifeOnline, husbandOnline);
+      }
 
-        // 先到先得：如果老婆位空着就当老婆，否则当老公
-        if (!wifeOnline) {
-          setRole('wife');
-          // 立刻抢占老婆位
-          try {
-            const fresh = await readGist();
-            if (fresh.room && !fresh.room.wifeConnected) {
-              fresh.room.wifeConnected = true;
-              fresh.room.wifeLastSeen = Date.now();
-              fresh.room.version++;
-              await writeGist(fresh);
-            }
-          } catch(e) {}
-        } else if (!husbandOnline) {
-          setRole('husband');
-          try {
-            const fresh = await readGist();
-            if (fresh.room && !fresh.room.husbandConnected) {
-              fresh.room.husbandConnected = true;
-              fresh.room.husbandLastSeen = Date.now();
-              fresh.room.version++;
-              await writeGist(fresh);
-            }
-          } catch(e) {}
-        } else {
-          // 两个都在线了（可能是刷新页面），默认老婆
-          setRole('wife');
-        }
-
-        // 检查今日是否已玩过
+      // 检查今日是否已玩过（未选角色时也显示结果）
+      if (!myRole) {
         const today = getToday();
         const todayRecord = records.find(r => r.date === today);
         if (todayRecord && room.revealed) {
+          // 已玩过，隐藏弹窗直接显示
+          roleModal.style.display = 'none';
+          setRole(todayRecord.wifeChoice ? 'wife' : 'husband');
           showResult(todayRecord.wifeChoice, todayRecord.husbandChoice, todayRecord.result, todayRecord);
           renderHistory(records);
+          return;
+        }
+      }
+
+      if (!myRole) return; // 还没选角色，等用户选
           return;
         }
 
@@ -721,12 +844,10 @@
     }
   })();
 
-  // ====== 启动（加随机延迟避免两人同时抢占） ======
-  const initDelay = 200 + Math.random() * 800; // 200-1000ms 随机延迟
-  setTimeout(() => {
-    poll();
-    pollTimer = setInterval(poll, POLL_INTERVAL);
-  }, initDelay);
+  // ====== 启动 ======
+  // 先轮询一次获取弹窗状态，然后持续轮询
+  poll();
+  pollTimer = setInterval(poll, POLL_INTERVAL);
 })();
 </script>
 </body>
